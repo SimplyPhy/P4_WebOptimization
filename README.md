@@ -6,7 +6,7 @@ ___
 
 ## Getting Started:
 
-1.  Clone or pull repository
+1.  Clone or pull repository.
 2.  Open index.html in your browser.
 3.  To check PageSpeed Insights score:
 
