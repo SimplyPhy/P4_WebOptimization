@@ -1,55 +1,67 @@
-## Website Performance Optimization portfolio project
+# Website Performance Optimization
+___
+### Udacity Frontend Nanodegree - Project 4
+##### By: Eric Phy
+#
+#
 
-Your challenge, if you wish to accept it (and we sure hope you will), is to optimize this online portfolio for speed! In particular, optimize the critical rendering path and make this page render as quickly as possible by applying the techniques you've picked up in the [Critical Rendering Path course](https://www.udacity.com/course/ud884).
+## Getting Started:
 
-To get started, check out the repository and inspect the code.
+1.  Clone or pull repository
+2.  Open index.html in your browser.
+3.  To check PageSpeed Insights score:
 
-### Getting started
+    1.
+    ```
+    bash:
+    $> cd /path/to/your-project-folder
+    $> python -m SimpleHTTPServer 8080
+    ```
 
-####Part 1: Optimize PageSpeed Insights score for index.html
+    2.  Download and install [ngrok](https://ngrok.com/) to the top-level of your project directory to make your local server accessible remotely.
 
-Some useful tips to help you get started:
+    3.  (In a seperate terminal window/tab):
+    ```
+    bash:
+    $> cd /path/to/your-project-folder
+    $> ./ngrok http 8080
+    ```
 
-1. Check out the repository
-1. To inspect the site on your phone, you can run a local server
+    4.  Copy the link provided by ngrok into the textbox at [PageSpeed Insights](https://developers.google.com/speed/pagespeed/insights/)
 
-  ```bash
-  $> cd /path/to/your-project-folder
-  $> python -m SimpleHTTPServer 8080
-  ```
+___
+## Optimizations made to index.hmtl
 
-1. Open a browser and visit localhost:8080
-1. Download and install [ngrok](https://ngrok.com/) to the top-level of your project directory to make your local server accessible remotely.
+- Minified HTML and CSS
+- Inlined CSS styles
+- Replaced web font link with web font loader
+- Resized pizzeria.png to 256px width (1/8th original)
+- Optimized all images using [Image Optim](https://imageoptim.com/mac)
+- Changed analytics code to run asynchronously
+- Added a media query to the print-only stylesheet
 
-  ``` bash
-  $> cd /path/to/your-project-folder
-  $> ./ngrok http 8080
-  ```
+___
+## Optimizations made to main.js
 
-1. Copy the public URL ngrok gives you and try running it through PageSpeed Insights! Optional: [More on integrating ngrok, Grunt and PageSpeed.](http://www.jamescryer.com/2014/06/12/grunt-pagespeed-and-ngrok-locally-testing/)
+- Changed `changePizzaSizes` function:
+  - Moved local variable assignments `dx` and `newwidth` outside of the `for loop`
+    - Changed their `querySelectorAll` selectors to `querySelector`
+  - Assigned new variable `randomPizzaCount` to the total number of `.randomPizzaContainer` elements
+    -  This took stress off the `for loop`, which had previously called `querySelectorAll.length` on `.randomPizzaContainer` each loop cycle
+- Changed `UpdatePositions` function:
+  - Restructured the `phase` variable declaration
+    - Created new variable `ScrollNum` outside of the `for loop`
+    - Assigned it to `... .scrollTop /1250`
+      - This removed the calculation from being called within the `for loop`
+- Changed `addEventListener` function @line 536:
+  - Changed the `for loop` interations from `200` to `20`
+    - There were way too many pizza images floating around that the user couldn't see
+  - Changed the `cols` variable from `8` to `4`
+    - The additional columns were offscreen
 
-Profile, optimize, measure... and then lather, rinse, and repeat. Good luck!
+___
+## Results:
 
-####Part 2: Optimize Frames per Second in pizza.html
-
-To optimize views/pizza.html, you will need to modify views/js/main.js until your frames per second rate is 60 fps or higher. You will find instructive comments in main.js. 
-
-You might find the FPS Counter/HUD Display useful in Chrome developer tools described here: [Chrome Dev Tools tips-and-tricks](https://developer.chrome.com/devtools/docs/tips-and-tricks).
-
-### Optimization Tips and Tricks
-* [Optimizing Performance](https://developers.google.com/web/fundamentals/performance/ "web performance")
-* [Analyzing the Critical Rendering Path](https://developers.google.com/web/fundamentals/performance/critical-rendering-path/analyzing-crp.html "analyzing crp")
-* [Optimizing the Critical Rendering Path](https://developers.google.com/web/fundamentals/performance/critical-rendering-path/optimizing-critical-rendering-path.html "optimize the crp!")
-* [Avoiding Rendering Blocking CSS](https://developers.google.com/web/fundamentals/performance/critical-rendering-path/render-blocking-css.html "render blocking css")
-* [Optimizing JavaScript](https://developers.google.com/web/fundamentals/performance/critical-rendering-path/adding-interactivity-with-javascript.html "javascript")
-* [Measuring with Navigation Timing](https://developers.google.com/web/fundamentals/performance/critical-rendering-path/measure-crp.html "nav timing api"). We didn't cover the Navigation Timing API in the first two lessons but it's an incredibly useful tool for automated page profiling. I highly recommend reading.
-* <a href="https://developers.google.com/web/fundamentals/performance/optimizing-content-efficiency/eliminate-downloads.html">The fewer the downloads, the better</a>
-* <a href="https://developers.google.com/web/fundamentals/performance/optimizing-content-efficiency/optimize-encoding-and-transfer.html">Reduce the size of text</a>
-* <a href="https://developers.google.com/web/fundamentals/performance/optimizing-content-efficiency/image-optimization.html">Optimize images</a>
-* <a href="https://developers.google.com/web/fundamentals/performance/optimizing-content-efficiency/http-caching.html">HTTP caching</a>
-
-### Customization with Bootstrap
-The portfolio was built on Twitter's <a href="http://getbootstrap.com/">Bootstrap</a> framework. All custom styles are in `dist/css/portfolio.css` in the portfolio repo.
-
-* <a href="http://getbootstrap.com/css/">Bootstrap's CSS Classes</a>
-* <a href="http://getbootstrap.com/components/">Bootstrap's Components</a>
+1. index.html has a PageSpeed Insight score of 95/100.
+2. pizza.hmtl scrolls at ~60 fps
+3. pizza.hmtl's `#sizeSlider` changes all pizza images in less than 5ms
