@@ -455,6 +455,7 @@ var resizePizzas = function(size) {
     var randomPizzaCount = document.querySelectorAll(".randomPizzaContainer").length;
 
     for (var i = 0; i < randomPizzaCount; i++) {
+      // Below is the original unoptimized loop code
       // var dx = determineDx(document.querySelectorAll(".randomPizzaContainer")[i], size);
       // var newwidth = (document.querySelectorAll(".randomPizzaContainer")[i].offsetWidth + dx) + 'px';
       document.querySelectorAll(".randomPizzaContainer")[i].style.width = newwidth;
@@ -515,6 +516,7 @@ function updatePositions() {
 
   for (var i = 0; i < items.length; i++) {
     var phase = Math.sin(scrollNum + (i % 5));
+    // Below is the original unoptimized loop code
     // var phase = Math.sin((document.body.scrollTop / 1250) + (i % 5));
     items[i].style.left = items[i].basicLeft + 100 * phase + 'px';
   }
@@ -534,8 +536,10 @@ window.addEventListener('scroll', updatePositions);
 
 // Generates the sliding pizzas when the page loads.
 document.addEventListener('DOMContentLoaded', function() {
+  // Changed cols from 8 to 4 due to the remaining cols resulting in unseen columns
   var cols = 4;
   var s = 256;
+  // Changed i < 200 to i < 20 because the remaining iterations drew unseen pizzas
   for (var i = 0; i < 20; i++) {
     var elem = document.createElement('img');
     elem.className = 'mover';
