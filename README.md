@@ -16,14 +16,16 @@ ___
   $> cd /path/to/your-project-folder
   $> python -m SimpleHTTPServer 8080
   ```
+  
   2.  Download and install [ngrok](https://ngrok.com/) to the top-level of your project directory to make your local server accessible remotely.
 
-  3.  (In a seperate terminal window/tab):
+  3.  (In a seperate terminal window/tab):  
   ```
   bash:
   $> cd /path/to/your-project-folder
   $> ./ngrok http 8080
   ```
+  
   4.  Copy the link provided by ngrok into the textbox at [PageSpeed Insights](https://developers.google.com/speed/pagespeed/insights/)
 
 ___
