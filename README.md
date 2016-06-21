@@ -42,23 +42,37 @@ ___
 - Added a media query to the print-only stylesheet
 
 ___
-## Optimizations made to main.js
+## Optimizations made to views/css/style.css
 
+- Added `transform: translateZ(0)` and `backface-visibility: hidden` to `.mover`
+  - These will automatically set hardware acceleration on for CSS in many environments
+
+___
+## Optimizations made to views/js/main.js
+
+- Changed multiple `querySelector` and `querySelectorAll` methods to the equivalent `getElementById` and `getElementsByClassName` where applicable
+  - These methods are faster
 - Changed `changePizzaSizes` function:
   - Moved local variable assignments `dx` and `newwidth` outside of the `for loop`
-    - Changed their `querySelectorAll` selectors to `querySelector`
   - Assigned new variable `randomPizzaCount` to the total number of `.randomPizzaContainer` elements
     -  This took stress off the `for loop`, which had previously called `querySelectorAll.length` on `.randomPizzaContainer` each loop cycle
+- Initialized `randomPizzaCountainer` variable to store an array of its corresponding class elements
+  - Used this variable's zero index value inside `dx` and `newwidth` function calls to avoid unnecessary DOM searches by the browser
+- Initialized `pizzaBox` variable outside of `changePizzaSizes`'s `for loop` and assigned it to an array containing all `randomPizzaCountainer` elements
+  - Called `pizzaBox` inside of the `for loop` to avoid unnecessary DOM searches by the browser
+- Moved `pizzaDiv` variable initialization outside of the `for loop` where it had originally been, thereby having the browser only search the DOM once 
 - Changed `UpdatePositions` function:
+  - Instantiated `items.length` as `len` variable during the `for loop` initialization
+    - This prevents repeat `.length` calculations from running unnecessarily
   - Restructured the `phase` variable declaration
+    - Instantiated it as an empty variable outside of the `for loop`
+      - This prevents the variable from being recreated each loop cycle
     - Created new variable `ScrollNum` outside of the `for loop`
     - Assigned it to `... .scrollTop /1250`
       - This removed the calculation from being called within the `for loop`
 - Changed `addEventListener` function @line 536:
-  - Changed the `for loop` interations from `200` to `20`
+  - Changed the `for loop` interations from `200` to `24`
     - There were way too many pizza images floating around that the user couldn't see
-  - Changed the `cols` variable from `8` to `4`
-    - The additional columns were offscreen
 
 ___
 ## Results:
@@ -66,3 +80,4 @@ ___
 1. index.html has a PageSpeed Insight score of 95/100.
 2. pizza.html scrolls at ~60 fps
 3. pizza.html's `#sizeSlider` changes all pizza images in less than 5ms
+4. CSS hardware acceleration will be activated when available
