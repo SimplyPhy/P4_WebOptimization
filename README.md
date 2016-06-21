@@ -1,7 +1,7 @@
 # Website Performance Optimization
 ___
 ### Udacity Frontend Nanodegree - Project 4
-##### By: Eric Phy
+
 #
 #
 
@@ -11,26 +11,26 @@ ___
 2.  Open index.html in your browser.
 3.  To check PageSpeed Insights score:
 
-    1.
+  1.
     ```
     bash:
     $> cd /path/to/your-project-folder
     $> python -m SimpleHTTPServer 8080
     ```
 
-    2.  Download and install [ngrok](https://ngrok.com/) to the top-level of your project directory to make your local server accessible remotely.
+  2.  Download and install [ngrok](https://ngrok.com/) to the top-level of your project directory to make your local server accessible remotely.
 
-    3.  (In a seperate terminal window/tab):
+  3.  (In a seperate terminal window/tab):
     ```
     bash:
     $> cd /path/to/your-project-folder
     $> ./ngrok http 8080
     ```
 
-    4.  Copy the link provided by ngrok into the textbox at [PageSpeed Insights](https://developers.google.com/speed/pagespeed/insights/)
+  4.  Copy the link provided by ngrok into the textbox at [PageSpeed Insights](https://developers.google.com/speed/pagespeed/insights/)
 
 ___
-## Optimizations made to index.hmtl
+## Optimizations made to index.html
 
 - Minified HTML and CSS
 - Inlined CSS styles
@@ -63,5 +63,5 @@ ___
 ## Results:
 
 1. index.html has a PageSpeed Insight score of 95/100.
-2. pizza.hmtl scrolls at ~60 fps
-3. pizza.hmtl's `#sizeSlider` changes all pizza images in less than 5ms
+2. pizza.html scrolls at ~60 fps
+3. pizza.html's `#sizeSlider` changes all pizza images in less than 5ms
