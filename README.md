@@ -3,6 +3,7 @@
 ___
 ### Udacity Frontend Nanodegree - Project 4
 
+The site is available to view [here](https://simplyphy.github.io/P4_WebOptimization/).
 
 ## Getting Started:
 
