@@ -2,7 +2,11 @@
 
 ___
 ### Udacity Frontend Nanodegree - Project 4
-
+    
+**Notes**:  
+- Because of the way Udacity's performance algorithms are implemented, this project isn't supported on Safari.
+- Click on the link to "Cam's Pizzaria" to see the page where most of the performance enhancements were implemented.  
+  
 The site is available to view [here](https://simplyphy.github.io/P4_WebOptimization/).
 
 ___
